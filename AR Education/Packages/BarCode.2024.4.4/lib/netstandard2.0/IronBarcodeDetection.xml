@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IronBarcodeDetection</name>
+    </assembly>
+    <members>
+        <member name="T:IronBarCodeDetection.BarcodeDetect">
+            <summary>
+            Class responsible for detecting barcodes in images.
+            </summary>
+        </member>
+        <member name="P:IronBarCodeDetection.BarcodeDetect.CONFIDENCE_THRESHOLD">
+            <summary>
+            Gets the confidence threshold.
+            </summary>
+        </member>
+        <member name="F:IronBarCodeDetection.BarcodeDetect.MODEL_NAME">
+            <summary>
+            Name of the ONNX model used for detection.
+            </summary>
+        </member>
+        <member name="P:IronBarCodeDetection.BarcodeDetect._inputImage">
+            <summary>
+            Gets the input image.
+            </summary>
+        </member>
+        <member name="M:IronBarCodeDetection.BarcodeDetect.#ctor(System.String,System.Double)">
+            <summary>
+            Initializes a new instance of the BarcodeDetect class using an image path.
+            </summary>
+            <param name="imagePath">Path to the input image.</param>
+            <param name="confidenceThreshold">Minimum confidence level for detection to be considered valid.</param>
+        </member>
+        <member name="M:IronBarCodeDetection.BarcodeDetect.#ctor(IronSoftware.Drawing.AnyBitmap,System.Double)">
+            <summary>
+            Initializes a new instance of the BarcodeDetect class using an AnyBitmap object.
+            </summary>
+            <param name="anyBitmap">The input AnyBitmap object.</param>
+            <param name="confidenceThreshold">Minimum confidence level for detection to be considered valid.</param>
+        </member>
+        <member name="M:IronBarCodeDetection.BarcodeDetect.DetectBarCode">
+            <summary>
+            Detects Barcode within the input image.
+            </summary>
+            <returns>Detection result of type <see cref="T:IronBarCodeDetection.DetectionResult" />.</returns>
+        </member>
+        <member name="T:IronBarCodeDetection.DetectionResult">
+            <summary>
+            Holds the result of a barcode detection operation.
+            </summary>
+        </member>
+        <member name="P:IronBarCodeDetection.DetectionResult.ProcessedImage">
+            <summary>
+            Gets the image after it has been processed for detection.
+            </summary>
+        </member>
+        <member name="P:IronBarCodeDetection.DetectionResult.Detections">
+            <summary>
+            Gets the list of detected objects in the image.
+            </summary>
+        </member>
+        <member name="M:IronBarCodeDetection.DetectionResult.#ctor(SixLabors.ImageSharp.Image{SixLabors.ImageSharp.PixelFormats.Rgba32},System.Collections.Generic.List{IronBarCodeDetection.Detection})">
+            <summary>
+            Initializes a new instance of the <see cref="T:IronBarCodeDetection.DetectionResult" /> struct.
+            </summary>
+            <param name="processedImage">The processed image.</param>
+            <param name="detections">The detections.</param>
+        </member>
+        <member name="T:IronBarCodeDetection.Detection">
+            <summary>
+            Represents a single detection in an image.
+            </summary>
+        </member>
+        <member name="P:IronBarCodeDetection.Detection.Confidence">
+            <summary>
+            Gets or sets the confidence level of the detection.
+            </summary>
+        </member>
+        <member name="P:IronBarCodeDetection.Detection.Rectangle">
+            <summary>
+            Gets or sets the bounding rectangle for the detection.
+            </summary>
+        </member>
+        <member name="M:IronBarCodeDetection.Detection.#ctor(System.Single,SixLabors.ImageSharp.RectangleF)">
+            <summary>
+            Initializes a new instance of the <see cref="T:IronBarCodeDetection.Detection" /> struct.
+            </summary>
+            <param name="confidence">The confidence level of the detection.</param>
+            <param name="rectangle">The bounding rectangle for the detection.</param>
+        </member>
+        <member name="T:IronBarCodeDetection.Exceptions.IronBarcodeDetectionException">
+            <summary>
+            A generic Exception raised by IronBarcode
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="T:IronBarCodeDetection.Exceptions.IronBarcodeRuntimesCopyException">
+            <summary>
+            A runtime file missing Exception raised by IronBarcode
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="T:IronBarcodeDetection.EmbeddedResourceLoader">
+            <summary>
+            Provides functionality to load embedded resources from the assembly.
+            </summary>
+        </member>
+        <member name="M:IronBarcodeDetection.EmbeddedResourceLoader.LoadResource(System.String)">
+            <summary>
+            Loads an embedded resource as a <see cref="T:System.IO.Stream" />.
+            </summary>
+            <param name="resourceName">The name of the embedded resource.</param>
+            <returns>A <see cref="T:System.IO.Stream" /> representing the embedded resource.</returns>
+            <exception cref="T:IronBarCodeDetection.Exceptions.IronBarcodeDetectionException">
+            Thrown when the specified resource cannot be found.
+            </exception>
+        </member>
+    </members>
+</doc>
