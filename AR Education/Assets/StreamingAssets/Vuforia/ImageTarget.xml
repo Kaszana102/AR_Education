@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig>
   <Tracking>
+    <ImageTarget name="vumark4" size="1.000000 1.730582" />
+    <ImageTarget name="vumark3" size="1.000000 1.728814" />
+    <ImageTarget name="vumark2" size="1.000000 1.721550" />
     <ImageTarget name="vumark1" size="1.000000 1.732609" />
   </Tracking>
 </QCARConfig>
