@@ -145,8 +145,9 @@ public class Player : MonoBehaviour
 	///  Changes scene and goes back to main menu
 	/// </summary>
 	public void GoBackToMenu()
-    { 
-        //go back to main menu
+    {
+		//go back to main menu
+		LevelLoader.LoadMainMenu();
     }
 
 }
