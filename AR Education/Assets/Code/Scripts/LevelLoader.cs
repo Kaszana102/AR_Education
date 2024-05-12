@@ -7,7 +7,7 @@ public class LevelLoader : MonoBehaviour
 {
     public static void LoadMainMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Main Menu");
     }
     public static void LoadBiezierCurve()
     {
@@ -15,11 +15,11 @@ public class LevelLoader : MonoBehaviour
     }
     public static void LoadLatticeDeform()
     {
-        SceneManager.LoadScene(0);//Change after merge
+        SceneManager.LoadScene("LatticeDeform");        
     }
 
     public static void LoadRGBMixer()
     {
-        SceneManager.LoadScene(0);//Change after merge
+        SceneManager.LoadScene(0); //Change after merge
     }
 }
