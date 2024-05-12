@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &426561062
+--- !u!114 &426561063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &952737100
+--- !u!114 &952737101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -478,15 +478,15 @@ PrefabInstance:
       objectReference: {fileID: 1561776055}
     - target: {fileID: 6114251909961332922, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 6114251909961332922, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 6114251909961332922, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 6114251909961332922, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -517,8 +517,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.35220146
+      value: 0.13207817
       objectReference: {fileID: 0}
     - target: {fileID: 7965090382100453674, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: mObserverBehaviour
@@ -538,16 +542,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6671381274449998289, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2134697492}
+      addedObject: {fileID: 2134697493}
     - targetCorrespondingSourceObject: {fileID: 4709039214680749797, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 952737100}
+      addedObject: {fileID: 952737101}
     - targetCorrespondingSourceObject: {fileID: 1244841129069981238, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 426561062}
+      addedObject: {fileID: 426561063}
     - targetCorrespondingSourceObject: {fileID: 7126449894803530771, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1561776058}
+      addedObject: {fileID: 1561776059}
   m_SourcePrefab: {fileID: 100100000, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
 --- !u!1 &1519068260
 GameObject:
@@ -685,7 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1561776058
+--- !u!114 &1561776059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -715,6 +719,14 @@ PrefabInstance:
     - target: {fileID: 104891358878258301, guid: 87c1e89a881b4e44e8fb8c662714d039, type: 3}
       propertyPath: mObserverBehaviour
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 953969933474487945, guid: 87c1e89a881b4e44e8fb8c662714d039, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 953969933474487945, guid: 87c1e89a881b4e44e8fb8c662714d039, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.15093803
       objectReference: {fileID: 0}
     - target: {fileID: 2069678880667767625, guid: 87c1e89a881b4e44e8fb8c662714d039, type: 3}
       propertyPath: mObserverBehaviour
@@ -814,12 +826,13 @@ MonoBehaviour:
   Overshoot: 0
   StartOvershoot: 0.055
   EndOvershoot: 0.055
-  Offset: {x: 0, y: 1, z: 0}
-  ErrorThreshold: 0.5
+  Offset: {x: 0, y: 0.1, z: 0}
+  ErrorThreshold: 0.75
   Patterns:
-  - {fileID: 6286459839551271383, guid: 1e167ad598858064c8993c33d890f9f8, type: 3}
+  - {fileID: 6286459839551271383, guid: 8d08f8f32334cbc468e5a2077996d683, type: 3}
   - {fileID: 6286459839551271383, guid: 98848318f97adc54e9812fad3d9ce99b, type: 3}
   - {fileID: 1000855559912459732, guid: deb98c339ab9d334690c6567620cbead, type: 3}
+  pattern: {fileID: 0}
 --- !u!4 &1951430243
 Transform:
   m_ObjectHideFlags: 0
@@ -851,7 +864,7 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2134697492
+--- !u!114 &2134697493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
