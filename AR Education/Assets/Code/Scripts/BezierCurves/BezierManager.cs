@@ -23,8 +23,9 @@ public class BezierManager : MonoBehaviour
 
     [SerializeField] private GameObject[] Patterns;
 
-    private Vector3[] points;  // reference points of the pattern
-    private List<Tracker> trackers = new List<Tracker>();  // trackers checked against points
+    public GameObject pattern;
+    private Tracker[] patternTrackers;  // reference trackers of the pattern
+    private List<Tracker> trackers = new List<Tracker>();  // trackers checked against patternTrackers
 
     
 
@@ -36,31 +37,28 @@ public class BezierManager : MonoBehaviour
         else if (Instance != this) {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        var pattern = Patterns[0];  // todo
-        
-        points = pattern.GetComponentsInChildren<BezierTracker>().Select(tracker => tracker.gameObject.transform.position).ToArray();
-        for (int i = 0; i < points.Length; i += 1) {
-            points[i].y = 0f;
-        }
-
         var allTrackers = GameObject.FindObjectsOfType<BezierTracker>();
-        if (allTrackers.Length < points.Length) {
-            throw new Exception("Not enough trackers detected");
-        }
 
-        for (int i = 0; i < points.Length; i += 1) {
+        pattern = Instantiate(Patterns[0], new Vector3(9999, 9999, 9999), Quaternion.identity);  // todo
+        
+        patternTrackers = pattern.GetComponentsInChildren<BezierTracker>();
+        //for (int i = 0; i < points.Length; i += 1) {
+        //    points[i].y = 0f;
+        //}
+
+        //if (allTrackers.Length < points.Length) {
+        //    throw new Exception("Not enough trackers for this pattern");
+        //}
+
+        for (int i = 0; i < patternTrackers.Length; i += 1) {
             trackers.Add(allTrackers[i]);
         }
-
-        Instantiate(pattern);
     }
 
     // Update is called once per frame
@@ -68,7 +66,17 @@ public class BezierManager : MonoBehaviour
     {
         if (CheckCompletion()) {
             Debug.Log("HOORAYY!");
+            Overshoot = Mathf.Sin(Time.time);
         }
+        else {
+            Overshoot = 0;
+        }
+
+        var middlePosition = Vector3.zero;
+        foreach (var tracker in trackers) {
+            middlePosition += tracker.gameObject.transform.position;
+        }
+        pattern.transform.position = middlePosition / trackers.Count;
                 
     }
 
@@ -80,8 +88,8 @@ public class BezierManager : MonoBehaviour
 
         foreach (var tracker in trackers) {
             bool ok = false;
-            foreach (var point in points) {
-                if (Vector3.SqrMagnitude(Vector3.Scale(tracker.gameObject.transform.position, new Vector3(1f, 0f, 1f)) - point) < ErrorThreshold) {
+            foreach (var patternTracker in patternTrackers) {
+                if (Vector3.SqrMagnitude(tracker.gameObject.transform.position - patternTracker.transform.position) < ErrorThreshold) {
                     ok = true;
                     break;
                 }
@@ -95,13 +103,8 @@ public class BezierManager : MonoBehaviour
 
     public void RefreshAll()
     {
-        if (false && EditorApplication.isPlaying) {
-            Debug.Log("Called in Play Mode");
-        }
-        else {
-            foreach (BezierDrawer drawer in GameObject.FindObjectsOfType<BezierDrawer>()) {
-                drawer.Refresh();
-            }
+        foreach (BezierDrawer drawer in GameObject.FindObjectsOfType<BezierDrawer>()) {
+            drawer.Refresh();
         }
     }
 }
