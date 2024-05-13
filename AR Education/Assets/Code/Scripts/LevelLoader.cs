@@ -11,7 +11,7 @@ public class LevelLoader : MonoBehaviour
     }
     public static void LoadBiezierCurve()
     {
-        SceneManager.LoadScene(0); //Change after merge
+        SceneManager.LoadScene("BezierScene");
     }
     public static void LoadLatticeDeform()
     {
@@ -20,6 +20,6 @@ public class LevelLoader : MonoBehaviour
 
     public static void LoadRGBMixer()
     {
-        SceneManager.LoadScene(0); //Change after merge
+        SceneManager.LoadScene("RGBMixer");
     }
 }
