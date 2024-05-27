@@ -46,10 +46,8 @@ public class ColorDisplayController : MonoBehaviour
         {
 			colorAmount += 1;
 			colorAmountText.text = colorAmount.ToString();
-			playerScript.MixColors(displayMaterial.color);
-			Debug.Log("Added color #"+ ColorUtility.ToHtmlStringRGB(displayMaterial.color) + " to mixer");
-		}
-        
+			playerScript.AddColor(displayMaterial.color);
+		}    
 	}
 
 	/// <summary>
@@ -61,8 +59,19 @@ public class ColorDisplayController : MonoBehaviour
         {
 			colorAmount -= 1;
 			colorAmountText.text = colorAmount.ToString();
+			playerScript.RemoveColor(displayMaterial.color);
 		}
 			
+	}
+
+
+	/// <summary>
+	/// Resets whole ColorDisplay
+	/// </summary>
+	public void ResetColor()
+	{
+		colorAmount = 0;
+		colorAmountText.text = colorAmount.ToString();
 	}
 
 	// Update is called once per frame

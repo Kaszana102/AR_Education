@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,9 +21,14 @@ public class Player : MonoBehaviour
     [SerializeField] private Image winImage;
 	[SerializeField] private TextMeshProUGUI similarityValue;
 
-	private float similarity;
+	[SerializeField] private GameObject[] vumarks;
 
-	int mixedColors = 0;
+	//[SerializeField] private GameObject UIOverlay;
+
+	[SerializeField] private List<Color> colorMixerList = new List<Color>();
+	[SerializeField] private string currentColorText;
+
+	private float similarity;
 
 
 	// Start is called before the first frame update
@@ -31,6 +37,7 @@ public class Player : MonoBehaviour
 		similarity = CompareColors(targetColor, currentColor);
 		targetColorImage.color = targetColor;
 		currentColorImage.color = currentColor;
+
 
 		winImage.gameObject.SetActive(false);
 
@@ -75,7 +82,9 @@ public class Player : MonoBehaviour
 	{
 		targetColorImage.color = targetColor;
 
-		if (mixedColors==0)
+		CalculateColorAndSimilarity();
+
+		if (colorMixerList.Count==0)
 		{
 			currentColorImage.color = Color.white;
 			similarityValue.text = "0%";
@@ -85,7 +94,7 @@ public class Player : MonoBehaviour
 			currentColorImage.color = currentColor;
 			similarityValue.text = Math.Round(CompareColors(targetColor, currentColor), 0).ToString() + "%";
 		}
-		
+		currentColorText = UnityEngine.ColorUtility.ToHtmlStringRGB(currentColor);
 	}
 
 	
@@ -93,25 +102,102 @@ public class Player : MonoBehaviour
 	/// Mixes new color with current one
 	/// </summary>
 	/// <param name="newColor"> new color to be added to mix</param>
-	public void MixColors(Color newColor)
+	public void AddColor(Color newColor)
 	{
-		if (mixedColors == 0)
-		{
-			currentColor = newColor;
-		}
-		else
-		{
-			float red = ((currentColor.r + newColor.r) / 2.0f);
-			float green = ((currentColor.g + newColor.g) / 2.0f);
-			float blue = ((currentColor.b + newColor.b) / 2.0f);
-
-			currentColor = new Color(red, green, blue);
-		}
-		similarity = CompareColors(targetColor, currentColor);
-		mixedColors++;
+		colorMixerList.Add(newColor);
+		Debug.Log("Added color #" + UnityEngine.ColorUtility.ToHtmlStringRGB(newColor) + " to mixer");
 
 		updateUI();
 		CheckWinCondition();	
+	}
+
+	/// <summary>
+	/// Removes color from mixer if it exists
+	/// </summary>
+	/// <param name="colorToRemove">Color to be removed</param>
+	public void RemoveColor(Color colorToRemove)
+	{
+		if (colorMixerList.Count != 0 && colorMixerList.Contains(colorToRemove))
+		{
+			colorMixerList.Remove(colorToRemove);
+			Debug.Log("Removed color #" + UnityEngine.ColorUtility.ToHtmlStringRGB(colorToRemove) + " from mixer");
+
+			updateUI();
+			CheckWinCondition();
+		}
+	}
+
+	/// <summary>
+	/// Calculates current color and it's similarity to target one
+	/// </summary>
+	private void CalculateColorAndSimilarity()
+	{
+		// if list is empty
+		if(colorMixerList.Count==0)
+		{
+			currentColor = Color.white;
+		}
+		// if list contains any colors
+		else 
+		{ 
+			currentColor = MixColorsFromList();
+			similarity = CompareColors(targetColor, currentColor);
+		}
+
+	}
+
+	/// <summary>
+	/// Mixes 2 colors 
+	/// </summary>
+	/// <param name="color1"></param>
+	/// <param name="color2"></param>
+	/// <returns>Return color mix</returns>
+	private Color MixColors(Color color1, Color color2)
+	{
+		float red = ((color1.r + color2.r) / 2.0f);
+		float green = ((color1.g + color2.g) / 2.0f);
+		float blue = ((color1.b + color2.b) / 2.0f);
+
+		return new Color(red, green, blue);
+	}
+
+
+
+	/// <summary>
+	/// Mixes all colors from list
+	/// </summary>
+	/// <returns>Mixed color from list</returns>
+	private Color MixColorsFromList()
+	{
+
+		if (colorMixerList.Count == 1)
+		{
+			return colorMixerList[0];
+		}
+		else
+		{
+			/*Color colorFromList = colorMixerList[0];
+
+			for (int i = 1; i < colorMixerList.Count; i++)
+			{
+				colorFromList = MixColors(colorFromList, colorMixerList[i]);
+			}
+			return colorFromList;
+			*/
+			float sumR =0, sumG=0, sumB=0;
+
+			foreach (Color color in colorMixerList)
+			{
+				sumR += color.r;
+				sumG += color.g;
+				sumB += color.b;
+			}
+			sumR/= colorMixerList.Count; 
+			sumG/= colorMixerList.Count;
+			sumB/= colorMixerList.Count;
+
+			return new Color(sumR, sumG, sumB);
+		}
 	}
 
 
@@ -120,10 +206,20 @@ public class Player : MonoBehaviour
 	/// </summary>
 	public void ResetMixer()
 	{
-		currentColor = Color.white;
-		mixedColors = 0;
+		colorMixerList.Clear();
 
+		foreach(GameObject vumark in vumarks)
+		{
+			if(vumark != null)
+			{ 
+				vumark.gameObject.GetComponent<ColorDisplayController>().ResetColor();
+			}
+			
+		}
+
+		Debug.Log("Reseted whole level");
 		updateUI();
+		CheckWinCondition();
 	}
 
 
@@ -133,7 +229,7 @@ public class Player : MonoBehaviour
 	private void CheckWinCondition()
 	{
 		// if color is accurate enough
-		if (similarity > thresholdPercentage)
+		if (similarity > thresholdPercentage && colorMixerList.Count>1)
 		{
 			winImage.gameObject.SetActive(true);
 			Debug.Log("You have won!!!");
