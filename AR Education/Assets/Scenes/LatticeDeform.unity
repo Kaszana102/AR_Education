@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 1393906017}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 3, z: 0}
 --- !u!114 &637475836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 1393906015}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 3, z: 0}
 --- !u!114 &913130262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 1393906016}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 3, z: 0}
 --- !u!114 &1570582820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1487,7 +1487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 1393906018}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 3, z: 0}
 --- !u!114 &1715944646
 MonoBehaviour:
   m_ObjectHideFlags: 0

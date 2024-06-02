@@ -175,6 +175,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -700
       objectReference: {fileID: 0}
+    - target: {fileID: 1155276640455735650, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1757710658287101290, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890011220160483314, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5837392865115933954, guid: 338b717d70d3d58439cdcaa681e15dbd,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -348,6 +363,11 @@ PrefabInstance:
     - target: {fileID: 8460916545979136900, guid: 338b717d70d3d58439cdcaa681e15dbd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470206206214998810, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904860073194452661, guid: 338b717d70d3d58439cdcaa681e15dbd,
@@ -688,6 +708,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -700
       objectReference: {fileID: 0}
+    - target: {fileID: 1155276640455735650, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1757710658287101290, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890011220160483314, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5837392865115933954, guid: 338b717d70d3d58439cdcaa681e15dbd,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -861,6 +896,11 @@ PrefabInstance:
     - target: {fileID: 8460916545979136900, guid: 338b717d70d3d58439cdcaa681e15dbd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470206206214998810, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904860073194452661, guid: 338b717d70d3d58439cdcaa681e15dbd,
@@ -918,6 +958,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -700
       objectReference: {fileID: 0}
+    - target: {fileID: 1155276640455735650, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1757710658287101290, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890011220160483314, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5837392865115933954, guid: 338b717d70d3d58439cdcaa681e15dbd,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1091,6 +1146,11 @@ PrefabInstance:
     - target: {fileID: 8460916545979136900, guid: 338b717d70d3d58439cdcaa681e15dbd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470206206214998810, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904860073194452661, guid: 338b717d70d3d58439cdcaa681e15dbd,
