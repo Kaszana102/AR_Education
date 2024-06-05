@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+//using System.Drawing;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,25 +29,40 @@ public class Player : MonoBehaviour
 	//[SerializeField] private GameObject UIOverlay;
 
 	[SerializeField] private List<Color> colorMixerList = new List<Color>();
-	[SerializeField] private string currentColorText;
 
+	[SerializeField] private int minMixerSteps;
+	[SerializeField] private int maxMixerSteps;
+
+	private List<Color> startingColors = new List<Color>();
 	private float similarity;
 
 
 	// Start is called before the first frame update
 	void Start()
     {
-		similarity = CompareColors(targetColor, currentColor);
-		targetColorImage.color = targetColor;
-		currentColorImage.color = currentColor;
-
-
-		winImage.gameObject.SetActive(false);
+		StartNewLevel();
 
 		CheckWinCondition();
 
 		updateUI();
     }
+
+	/// <summary>
+	/// Starts new random level
+	/// </summary>
+	public void StartNewLevel()
+	{
+		// Randomize random colors for each vumark
+		startingColors = RandomizeStartingColors(vumarks.Length);
+
+		GenerateTargetColor(minMixerSteps, maxMixerSteps);
+
+		similarity = CompareColors(targetColor, currentColor);
+
+		ResetMixer();
+	}
+
+
 
 	/// <summary>
 	/// Compares 2 RGB colors based on their distance on RGB space
@@ -94,7 +112,6 @@ public class Player : MonoBehaviour
 			currentColorImage.color = currentColor;
 			similarityValue.text = Math.Round(CompareColors(targetColor, currentColor), 0).ToString() + "%";
 		}
-		currentColorText = UnityEngine.ColorUtility.ToHtmlStringRGB(currentColor);
 	}
 
 	
@@ -140,7 +157,7 @@ public class Player : MonoBehaviour
 		// if list contains any colors
 		else 
 		{ 
-			currentColor = MixColorsFromList();
+			currentColor = MixColorsFromList(colorMixerList);
 			similarity = CompareColors(targetColor, currentColor);
 		}
 
@@ -162,42 +179,56 @@ public class Player : MonoBehaviour
 	}
 
 
-
 	/// <summary>
 	/// Mixes all colors from list
 	/// </summary>
 	/// <returns>Mixed color from list</returns>
-	private Color MixColorsFromList()
+	private Color MixColorsFromList(List<Color> colorsList)
 	{
-
-		if (colorMixerList.Count == 1)
+		// if list has 1 element return it
+		if (colorsList.Count == 1)
 		{
-			return colorMixerList[0];
+			return colorsList[0];
 		}
 		else
 		{
-			/*Color colorFromList = colorMixerList[0];
-
-			for (int i = 1; i < colorMixerList.Count; i++)
-			{
-				colorFromList = MixColors(colorFromList, colorMixerList[i]);
-			}
-			return colorFromList;
-			*/
+			
 			float sumR =0, sumG=0, sumB=0;
 
-			foreach (Color color in colorMixerList)
+			// mixed color is average R, G, and B value of all its elements
+			foreach (Color color in colorsList)
 			{
 				sumR += color.r;
 				sumG += color.g;
 				sumB += color.b;
 			}
-			sumR/= colorMixerList.Count; 
-			sumG/= colorMixerList.Count;
-			sumB/= colorMixerList.Count;
+			sumR/= colorsList.Count; 
+			sumG/= colorsList.Count;
+			sumB/= colorsList.Count;
 
 			return new Color(sumR, sumG, sumB);
 		}
+	}
+
+
+	/// <summary>
+	/// Generates random target color from initial colors
+	/// </summary>
+	/// <param name="minSteps">Min amount of steps during generating color</param>
+	/// <param name="maxSteps">Max amount of steps during generating color</param>
+	private void GenerateTargetColor(int minSteps, int maxSteps)
+	{
+		int steps = UnityEngine.Random.Range(minSteps, maxSteps);
+
+		List<Color> targetList= new List<Color>();
+
+		// create list of randomly picked colors from starting colors
+		for(int i = 0; i < steps; i++)
+		{
+			targetList.Add(startingColors[UnityEngine.Random.Range(0, startingColors.Count)]);
+		}
+
+		targetColor = MixColorsFromList(targetList);
 	}
 
 
@@ -206,20 +237,73 @@ public class Player : MonoBehaviour
 	/// </summary>
 	public void ResetMixer()
 	{
-		colorMixerList.Clear();
+		winImage.gameObject.SetActive(false);
 
-		foreach(GameObject vumark in vumarks)
+		// if color list contaions elements reset all
+		if (colorMixerList.Count != 0)
 		{
-			if(vumark != null)
-			{ 
-				vumark.gameObject.GetComponent<ColorDisplayController>().ResetColor();
+			colorMixerList.Clear();
+
+			foreach (GameObject vumark in vumarks)
+			{
+				if (vumark != null)
+				{
+					vumark.transform.GetChild(0).GetComponent<ColorDisplayController>().ResetColor();
+				}
 			}
-			
+
+			Debug.Log("Reseted whole level");
+			updateUI();
+			CheckWinCondition();
+
+		}	
+	}
+
+	
+
+
+	/// <summary>
+	/// Randomizes starting colors
+	/// </summary>
+	/// <param name="count"> Amount of colors to be generated </param>
+	/// <returns> List of generated random colors </returns>
+	private List<Color> RandomizeStartingColors(int count)
+	{
+		List<Color> colors = new List<Color>();
+
+		while(colors.Count < count) 
+		{
+			Color newColor = GenerateRandomColor();
+
+			// if color is true black then randomize again
+			if(newColor.r == 0f && newColor.g == 0f && newColor.b == 0f)
+			{
+				continue;
+			}
+
+			colors.Add(newColor);
 		}
 
-		Debug.Log("Reseted whole level");
-		updateUI();
-		CheckWinCondition();
+		// set starting color for all vumarks
+		for (int i = 0;i<colors.Count;i++)
+		{
+			vumarks[i].transform.GetChild(0).GetComponent<ColorDisplayController>().SetColor(colors[i]);
+		}
+
+		return colors;
+	}
+
+
+	/// <summary>
+	/// Generates random RGB color
+	/// </summary>
+	/// <returns> random generated RGB color</returns>
+	private Color GenerateRandomColor()
+	{
+		float r = UnityEngine.Random.Range(0f, 1f);
+		float g = UnityEngine.Random.Range(0f, 1f);
+		float b = UnityEngine.Random.Range(0f, 1f);
+		return new Color(r, g, b);	
 	}
 
 

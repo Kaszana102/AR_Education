@@ -1,13 +1,12 @@
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using TMPro;
 using UnityEngine;
 
 public class ColorDisplayController : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.Color cardsColor;
+    [SerializeField] private Color cardsColor;
     [SerializeField] private Material displayMaterial;
     [SerializeField] private TextMeshProUGUI colorValueText;
     [SerializeField] private TextMeshProUGUI colorAmountText;
@@ -27,14 +26,8 @@ public class ColorDisplayController : MonoBehaviour
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		playerScript = arCameraGameObject.GetComponent<Player>();
 
-		displayMaterial.color = cardsColor;
 
-        colorText = "#" + ColorUtility.ToHtmlStringRGB(displayMaterial.color);
-
-        colorValueText.text = colorText;
-        colorAmountText.text = colorAmount.ToString();
-
-		
+		SetColor(cardsColor);	
 	}
 
 	/// <summary>
@@ -62,6 +55,22 @@ public class ColorDisplayController : MonoBehaviour
 			playerScript.RemoveColor(displayMaterial.color);
 		}
 			
+	}
+
+	/// <summary>
+	/// Sets cards color
+	/// </summary>
+	/// <param name="color"> Color to be set on card</param>
+	public void SetColor(Color color)
+	{
+		cardsColor = color;
+
+		displayMaterial.color = cardsColor;
+
+		colorText = "#" + ColorUtility.ToHtmlStringRGB(displayMaterial.color);
+
+		colorValueText.text = colorText;
+		colorAmountText.text = colorAmount.ToString();
 	}
 
 
