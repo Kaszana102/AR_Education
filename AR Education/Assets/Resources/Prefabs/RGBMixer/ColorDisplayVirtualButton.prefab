@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 811911338555563474}
   - component: {fileID: 3777871203444359288}
   m_Layer: 0
-  m_Name: ColorDisplay
+  m_Name: ColorDisplayVirtualButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
