@@ -246,6 +246,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72cad0b1ca6cb5942a1deaedec766dc2, type: 3}
+--- !u!1 &267240578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7141743203963333989, guid: 72cad0b1ca6cb5942a1deaedec766dc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 152107347}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &417875698
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ErrorThreshold: 0.5
+  CongratUI: {fileID: 267240578}
 --- !u!4 &1162943340
 Transform:
   m_ObjectHideFlags: 0

@@ -11,7 +11,14 @@ public class LatticeManager : MonoBehaviour
     List<GameObject> targetBones;
     
     List<GameObject> activeBones = null;
-    GameObject activeChallenge =  null;   
+    GameObject activeChallenge =  null;
+
+    [SerializeField]
+    GameObject CongratUI = null;
+
+    float startChallengeTime = 0;
+    bool completedChallenge = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -57,16 +64,34 @@ public class LatticeManager : MonoBehaviour
             //add to bones list
             targetBones.Add(vumark.obj.gameObject);
         }
-        
+
+        startChallengeTime = Time.time;
+        completedChallenge=false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (CheckCompletion())
+        if (!completedChallenge &&(  CheckCompletion() || Time.time > 5))
         {
             Debug.Log("HOORAYY!");
+            completedChallenge = true;
+            Win();
         }
+    }
+
+    void Win()
+    {
+        CongratUI.SetActive(true);
+
+        float elapsedTime = Time.time - startChallengeTime;
+
+        int score = (int)(1000 - elapsedTime);
+
+        ScoreManager.AddScore(
+            new Score("ma³pka", score),
+            Game.LATTICE
+            );
     }
 
     private bool CheckCompletion()

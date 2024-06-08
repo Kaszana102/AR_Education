@@ -14,6 +14,12 @@ public class Score
 {
     public string challengeName="";
     public int score=0;
+
+    public Score(string challengeName, int score)
+    {
+        this.challengeName = challengeName;
+        this.score = score;
+    }
 }
 
 /// <summary>
@@ -65,6 +71,10 @@ static public class ScoreManager
         {
             string json = r.ReadToEnd();
             Dictionary<string, int> items = JsonConvert.DeserializeObject<Dictionary<string, int>>(json);
+            if (items == null)
+            {
+                items = new Dictionary<string, int>();
+            }
             return items;
         }                
     }
