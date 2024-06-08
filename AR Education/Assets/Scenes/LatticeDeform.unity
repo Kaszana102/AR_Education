@@ -131,6 +131,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1643463265619980761, guid: 72cad0b1ca6cb5942a1deaedec766dc2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1162943339}
+    - target: {fileID: 1643463265619980761, guid: 72cad0b1ca6cb5942a1deaedec766dc2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InstantiateRandomChallenge
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643463265619980761, guid: 72cad0b1ca6cb5942a1deaedec766dc2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LatticeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643463265619980761, guid: 72cad0b1ca6cb5942a1deaedec766dc2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3856702777984408691, guid: 72cad0b1ca6cb5942a1deaedec766dc2,
         type: 3}
       propertyPath: m_Pivot.x
@@ -230,6 +250,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141743203963333989, guid: 72cad0b1ca6cb5942a1deaedec766dc2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8922112710236728327, guid: 72cad0b1ca6cb5942a1deaedec766dc2,
         type: 3}

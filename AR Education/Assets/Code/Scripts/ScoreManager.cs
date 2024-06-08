@@ -88,9 +88,12 @@ static public class ScoreManager
     {
         var scores = GetGameScores(game);
 
-        if (scores.ContainsKey(score.challengeName) && scores[score.challengeName] < score.score)
+        if (scores.ContainsKey(score.challengeName))
         {
-            scores[score.challengeName] = score.score;
+            if (scores[score.challengeName] < score.score)
+            {
+                scores[score.challengeName] = score.score;
+            }
         }
         else
         {
