@@ -1597,6 +1597,10 @@ PrefabInstance:
       value: vumark4
       objectReference: {fileID: 0}
     - target: {fileID: 5984273709255598472, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
+      propertyPath: Offset.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984273709255598472, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: Points.Array.data[0]
       value: 
       objectReference: {fileID: 3689854316454460252}
@@ -1659,6 +1663,30 @@ PrefabInstance:
     - target: {fileID: 6446418132728368135, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: m_LocalPosition.z
       value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
+      propertyPath: m_Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a86f32d7deaba6478d5d5330ae65688, type: 2}
+    - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value

@@ -26,7 +26,7 @@ public class BezierManager : MonoBehaviour
 
     [SerializeField] private GameObject[] Patterns;
 
-    public GameObject pattern;
+    private GameObject pattern;
     private Tracker[] patternTrackers;  // reference trackers of the pattern
     private List<Tracker> trackers = new List<Tracker>();  // trackers checked against patternTrackers
 
@@ -68,11 +68,7 @@ public class BezierManager : MonoBehaviour
     void Update()
     {
         if (CheckCompletion()) {
-            Debug.Log("HOORAYY!");
             Overshoot = Mathf.Sin(Time.time);
-            RefreshAll();
-
-            GenerateNewPattern();
             RefreshAll();
         }
         else {
@@ -92,6 +88,13 @@ public class BezierManager : MonoBehaviour
         patternMiddlePosition /= patternTrackers.Length;
 
         pattern.transform.position = middlePosition - patternMiddlePosition;
+    }
+
+    public void StartNewLevel()
+    {
+        Overshoot = 0;
+        GenerateNewPattern();
+        RefreshAll();
     }
 
     private void GenerateNewPattern()

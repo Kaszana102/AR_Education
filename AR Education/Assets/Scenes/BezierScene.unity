@@ -234,6 +234,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1643463265619980761, guid: 72cad0b1ca6cb5942a1deaedec766dc2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1951430242}
+    - target: {fileID: 1643463265619980761, guid: 72cad0b1ca6cb5942a1deaedec766dc2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartNewLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643463265619980761, guid: 72cad0b1ca6cb5942a1deaedec766dc2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BezierManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643463265619980761, guid: 72cad0b1ca6cb5942a1deaedec766dc2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3856702777984408691, guid: 72cad0b1ca6cb5942a1deaedec766dc2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -312,6 +328,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3856702777984408691, guid: 72cad0b1ca6cb5942a1deaedec766dc2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141743203963333989, guid: 72cad0b1ca6cb5942a1deaedec766dc2, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8922112710236728327, guid: 72cad0b1ca6cb5942a1deaedec766dc2, type: 3}
@@ -516,6 +536,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37bcc67505d142f489d15d14f1462fe5, type: 2}
     - target: {fileID: 7115730547047814110, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
       value: 0
@@ -824,15 +848,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resolution: 50
   Overshoot: 0
-  StartOvershoot: 0.055
-  EndOvershoot: 0.055
+  StartOvershoot: 0.005
+  EndOvershoot: 0.005
   Offset: {x: 0, y: 0.1, z: 0}
   ErrorThreshold: 0.75
+  RandomCurveSize: {x: 5, y: 3}
+  RandomCurveMinPointDistance: 1
   Patterns:
   - {fileID: 6286459839551271383, guid: 8d08f8f32334cbc468e5a2077996d683, type: 3}
-  - {fileID: 6286459839551271383, guid: 98848318f97adc54e9812fad3d9ce99b, type: 3}
-  - {fileID: 1000855559912459732, guid: deb98c339ab9d334690c6567620cbead, type: 3}
-  pattern: {fileID: 0}
 --- !u!4 &1951430243
 Transform:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ public class BezierDrawer : MonoBehaviour
     private LineRenderer lineRenderer;
     private Vector3[] previousPositions;
 
+    public Vector3 Offset;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class BezierDrawer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var positions = Points.Select(Point => Point.position + BezierManager.Instance.Offset).ToArray();
+        var positions = Points.Select(Point => Point.position + BezierManager.Instance.Offset + Offset).ToArray();
         
         if (!positions.SequenceEqual(previousPositions)) {
             var linePoints = BezierUtility.GeneratePoints(positions, BezierManager.Instance.Resolution,
