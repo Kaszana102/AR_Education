@@ -1598,7 +1598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5984273709255598472, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: Offset.y
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5984273709255598472, guid: 09ce39a557ece1c4c9631ca2c74287e7, type: 3}
       propertyPath: Points.Array.data[0]
