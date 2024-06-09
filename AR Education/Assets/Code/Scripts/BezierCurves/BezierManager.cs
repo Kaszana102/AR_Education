@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System;
 
 public class BezierManager : MonoBehaviour
 {
     public static BezierManager Instance;
 
+    [Header("Draw Settings")]
     [Range(2, 200)]
     public int Resolution;
     [Range(-4, 4)]
@@ -18,7 +18,11 @@ public class BezierManager : MonoBehaviour
     public float EndOvershoot;
     public Vector3 Offset;
 
+    [Header("Gameplay Settings")]
     [SerializeField] private float ErrorThreshold = 0.5f;
+    [SerializeField] private Vector2 RandomCurveSize = new Vector2(5f, 3f);
+    [SerializeField] private float RandomCurveMinPointDistance = 1f;
+
 
     [SerializeField] private GameObject[] Patterns;
 
@@ -67,6 +71,9 @@ public class BezierManager : MonoBehaviour
             Debug.Log("HOORAYY!");
             Overshoot = Mathf.Sin(Time.time);
             RefreshAll();
+
+            GenerateNewPattern();
+            RefreshAll();
         }
         else {
             Overshoot = 0;
@@ -85,6 +92,39 @@ public class BezierManager : MonoBehaviour
         patternMiddlePosition /= patternTrackers.Length;
 
         pattern.transform.position = middlePosition - patternMiddlePosition;
+    }
+
+    private void GenerateNewPattern()
+    {
+        var positions = new List<Vector3>();
+
+        for (int i = 0; i < patternTrackers.Length; i += 1) {
+            Vector3 newPosition;
+            bool valid = false;
+
+            do
+            {
+                newPosition = new Vector3(Random.Range(-RandomCurveSize.x/2, RandomCurveSize.x/2), 0f, Random.Range(-RandomCurveSize.y/2, RandomCurveSize.y/2));
+                valid = true;
+
+                foreach (var position in positions) {
+                    if (Vector3.SqrMagnitude(position - newPosition) < RandomCurveMinPointDistance) {
+                        valid = false;
+                        break;
+                    }
+                }
+            } while (!valid);
+
+            positions.Add(newPosition);
+        }
+
+        for (int i = 0; i < patternTrackers.Length; i += 1) {
+            patternTrackers[i].transform.position = positions[i];
+        }
+
+        if (CheckCompletion()) {
+            GenerateNewPattern();
+        }
     }
 
     private bool CheckCompletion()
