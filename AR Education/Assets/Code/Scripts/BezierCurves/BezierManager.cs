@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+using TMPro;
+
 public class BezierManager : MonoBehaviour
 {
     public static BezierManager Instance;
@@ -23,12 +25,26 @@ public class BezierManager : MonoBehaviour
     [SerializeField] private Vector2 RandomCurveSize = new Vector2(5f, 3f);
     [SerializeField] private float RandomCurveMinPointDistance = 1f;
 
+    [SerializeField] private int MaxScore;
+
+    [SerializeField] private GameObject CongratUI;
+
+    [SerializeField] private int RandomSeed;
+
 
     [SerializeField] private GameObject[] Patterns;
 
+    
+    public BezierDrawer startPattern;
+
+
     private GameObject pattern;
-    private Tracker[] patternTrackers;  // reference trackers of the pattern
-    private List<Tracker> trackers = new List<Tracker>();  // trackers checked against patternTrackers
+    private Transform[] patternTrackers;  // reference trackers of the pattern
+    private List<Transform> trackers;  // trackers checked against patternTrackers
+
+    private bool win = false;
+    private float startTime;
+    private int curveNumber;
 
     
 
@@ -46,28 +62,42 @@ public class BezierManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var allTrackers = GameObject.FindObjectsOfType<BezierTracker>();
+        Random.seed = RandomSeed;
+        curveNumber = 1;
+
+        var allTrackers = startPattern.Points;
 
         pattern = Instantiate(Patterns[0], new Vector3(9999, 9999, 9999), Quaternion.identity);  // todo
         
-        patternTrackers = pattern.GetComponentsInChildren<BezierTracker>();
-        //for (int i = 0; i < points.Length; i += 1) {
-        //    points[i].y = 0f;
-        //}
+        patternTrackers = pattern.transform.GetComponentsInChildren<BezierDrawer>()[0].Points;
 
-        //if (allTrackers.Length < points.Length) {
-        //    throw new Exception("Not enough trackers for this pattern");
-        //}
-
+        trackers = new List<Transform>();
         for (int i = 0; i < patternTrackers.Length; i += 1) {
             trackers.Add(allTrackers[i]);
         }
+
+        startTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (CheckCompletion()) {
+        if (!win && CheckCompletion()) {
+            win = true;
+
+            float elapsedTime = Time.time - startTime;
+            int score = (int)(MaxScore - elapsedTime);
+
+            ScoreManager.AddScore(
+                new Score("Curve " + curveNumber, score),
+                Game.BEZIER
+            );
+
+            CongratUI.SetActive(true);
+            CongratUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "GRATULACJE\nWynik: " + score;
+        }
+
+        if (win){
             Overshoot = Mathf.Sin(Time.time);
             RefreshAll();
         }
@@ -92,7 +122,11 @@ public class BezierManager : MonoBehaviour
 
     public void StartNewLevel()
     {
+        win = false;
         Overshoot = 0;
+        startTime = Time.time;
+        curveNumber += 1;
+
         GenerateNewPattern();
         RefreshAll();
     }
@@ -164,7 +198,6 @@ public class BezierManager : MonoBehaviour
     public void RefreshAll()
     {
         foreach (BezierDrawer drawer in GameObject.FindObjectsOfType<BezierDrawer>()) {
-            drawer.Refresh();
         }
     }
 }
