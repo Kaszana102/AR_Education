@@ -8,10 +8,14 @@ public class ScoreUILoader : MonoBehaviour
 
     [SerializeField]
     Game gameToLoadScores = Game.LATTICE;
+
+    [SerializeField]
+    Transform ScoreContainer;
+
     [SerializeField]
     GameObject ScorePrefab;
 
-    void Start()
+    void Awake()
     {
         var scores = ScoreManager.GetGameScores(gameToLoadScores);
 
@@ -20,7 +24,7 @@ public class ScoreUILoader : MonoBehaviour
             GameObject scoreUI = GameObject.Instantiate(ScorePrefab);
             scoreUI.transform.Find("name").GetComponent<TextMeshProUGUI>().text = score.Key;
             scoreUI.transform.Find("score").GetComponent<TextMeshProUGUI>().text = score.Value.ToString();
-            scoreUI.transform.SetParent(this.transform,false);
+            scoreUI.transform.SetParent(ScoreContainer, false);
         }
     }
 

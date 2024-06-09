@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 976194609393599212}
   - component: {fileID: 1365448335103668818}
-  - component: {fileID: 2057502352135429656}
   m_Layer: 5
   m_Name: Scrollable
   m_TagString: Untagged
@@ -55,7 +54,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 0
+  m_Spacing: 1.85
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -63,21 +62,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &2057502352135429656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699865080320789714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 944c25cd7bd490e44a418d5a92241e7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameToLoadScores: 0
-  ScorePrefab: {fileID: 7358557820554459057, guid: 8b0f61c7f2a255c45957b1d7ca452a55,
-    type: 3}
 --- !u!1 &8904860073194452661
 GameObject:
   m_ObjectHideFlags: 0

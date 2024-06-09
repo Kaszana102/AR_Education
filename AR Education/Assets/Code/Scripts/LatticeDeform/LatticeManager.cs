@@ -27,6 +27,8 @@ public class LatticeManager : MonoBehaviour
     Transform model = null;
     string challengeName = "";
 
+    [SerializeField]
+    TextMeshProUGUI levelNameUI;
     
     private void Awake()
     {
@@ -60,33 +62,53 @@ public class LatticeManager : MonoBehaviour
             Destroy(activeChallenge);
         }
 
+        activeChallenge = null;
+        
+
+        startChallengeTime = Time.time;
+        completedChallenge=false;
+        foundAnyVumark = false;
+
+        StartCoroutine(DelayedSpawn());
+    }
+
+    IEnumerator DelayedSpawn()
+    {
+        int a = 0;
+        while (a < 2)
+        {
+            a++;
+            yield return null; 
+        }
+
         var random = new System.Random();
-        int index = random.Next(challenges.Count);        
+        int index = random.Next(challenges.Count);
         activeChallenge = Instantiate(challenges[index]);
 
         challengeName = challenges[index].name;
+        levelNameUI.text = challengeName;
 
         // create real bones list
-        activeBones = new List<GameObject>();        
+        activeBones = new List<GameObject>();
         vumarks = activeChallenge.GetComponentsInChildren<RotatableOffset>();
         System.Random rand = new System.Random();
-        foreach(RotatableOffset vumark in vumarks)
+        foreach (RotatableOffset vumark in vumarks)
         {
             // randomize offset
-            float offset_x = (float) rand.NextDouble() * 1 + 0.5f;
-            float offset_z = (float) rand.NextDouble() * 1 + 0.5f;
+            float offset_x = (float)rand.NextDouble() * 1 + 0.5f;
+            float offset_z = (float)rand.NextDouble() * 1 + 0.5f;
 
             offset_x *= rand.Next(2) == 1 ? 1 : -1;
             offset_z *= rand.Next(2) == 1 ? 1 : -1;
 
-            float offset_y = (float)rand.NextDouble()*2;
+            float offset_y = (float)rand.NextDouble() * 2;
 
             vumark.offset = new Vector3(offset_x, 1, offset_z);
             vumark.minYoffsetY = 0;
             vumark.maxYoffsetY = 2;
 
             //add to bones list
-            activeBones.Add(vumark.obj.gameObject);            
+            activeBones.Add(vumark.obj.gameObject);
         }
 
 
@@ -98,10 +120,6 @@ public class LatticeManager : MonoBehaviour
             //add to bones list
             targetBones.Add(vumark.obj.gameObject);
         }
-
-        startChallengeTime = Time.time;
-        completedChallenge=false;
-        foundAnyVumark = false;
     }
 
     public void FoundVumark()
@@ -207,6 +225,11 @@ public class LatticeManager : MonoBehaviour
 
     private bool CheckCompletion()
     {
+        if (activeChallenge == null)
+        {
+            return false;
+        }
+
         if (activeBones.Count == 0)
         {
             return false;
