@@ -66,6 +66,7 @@ public class BezierManager : MonoBehaviour
         if (CheckCompletion()) {
             Debug.Log("HOORAYY!");
             Overshoot = Mathf.Sin(Time.time);
+            RefreshAll();
         }
         else {
             Overshoot = 0;
@@ -75,8 +76,15 @@ public class BezierManager : MonoBehaviour
         foreach (var tracker in trackers) {
             middlePosition += tracker.gameObject.transform.position;
         }
-        pattern.transform.position = middlePosition / trackers.Count;
-                
+        middlePosition /= trackers.Count;
+
+        var patternMiddlePosition = Vector3.zero;
+        foreach (var tracker in patternTrackers) {
+            patternMiddlePosition += tracker.gameObject.transform.localPosition;
+        }
+        patternMiddlePosition /= patternTrackers.Length;
+
+        pattern.transform.position = middlePosition - patternMiddlePosition;
     }
 
     private bool CheckCompletion()
@@ -84,17 +92,27 @@ public class BezierManager : MonoBehaviour
         if (trackers.Count == 0) {
             return false;
         }
+        bool ok = true;
+        for (int i = 0; i < trackers.Count; i += 1) {
+            var tracker = trackers[i];
+            var patternTracker = patternTrackers[i];
 
-        foreach (var tracker in trackers) {
-            bool ok = false;
-            foreach (var patternTracker in patternTrackers) {
-                if (Vector3.SqrMagnitude(tracker.gameObject.transform.position - patternTracker.transform.position) < ErrorThreshold) {
-                    ok = true;
+            if (!(Vector3.SqrMagnitude(tracker.gameObject.transform.position - patternTracker.transform.position) < ErrorThreshold)) {
+                    ok = false;
                     break;
-                }
             }
-            if (!ok) {
-                return false;
+        }
+
+        if (ok) {
+            return true;
+        }
+
+        for (int i = 0; i < trackers.Count; i += 1) {
+            var tracker = trackers[i];
+            var patternTracker = patternTrackers[^(i+1)];
+
+            if (!(Vector3.SqrMagnitude(tracker.gameObject.transform.position - patternTracker.transform.position) < ErrorThreshold)) {
+                    return false;
             }
         }
         return true;
