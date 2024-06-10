@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(BezierManager))]
-public class YourScriptEditor : Editor
+public class BezierEditor : Editor
 {
     private int previousResolution;
     private float previousOvershoot;
