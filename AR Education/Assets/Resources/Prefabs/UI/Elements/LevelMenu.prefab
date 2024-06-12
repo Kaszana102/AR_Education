@@ -408,6 +408,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoresLattice
       objectReference: {fileID: 0}
+    - target: {fileID: 8904860073194452661, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2057502352135429656, guid: 338b717d70d3d58439cdcaa681e15dbd, type: 3}
     m_RemovedGameObjects: []
@@ -1063,6 +1068,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ScoresBezier
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904860073194452661, guid: 338b717d70d3d58439cdcaa681e15dbd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

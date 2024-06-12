@@ -26,6 +26,10 @@ public class ScoreUILoader : MonoBehaviour
             scoreUI.transform.Find("score").GetComponent<TextMeshProUGUI>().text = score.Value.ToString();
             scoreUI.transform.SetParent(ScoreContainer, false);
         }
+
+        Vector2 delta = ScoreContainer.GetComponent<RectTransform>().sizeDelta;
+        delta.y = ScorePrefab.GetComponent<RectTransform>().sizeDelta.y * scores.Count;
+        ScoreContainer.GetComponent<RectTransform>().sizeDelta = delta;
     }
 
 }

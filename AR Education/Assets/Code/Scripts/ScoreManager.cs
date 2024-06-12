@@ -31,14 +31,17 @@ static public class ScoreManager
     const string LATTICE_FILE = "lattice_scores";
     const string BEZIER_FILE = "bezier_scores";
 
+    static string LATTICE_PATH = Application.persistentDataPath + '/' + LATTICE_FILE;
+    static string BEZIER_PATH = Application.persistentDataPath + '/' + BEZIER_FILE;
+
     static string GetGameScoreFileName(Game game)
     {
         switch (game)
         {
             case Game.LATTICE:
-                return LATTICE_FILE;
+                return LATTICE_PATH;
             case Game.BEZIER:
-                return BEZIER_FILE;
+                return BEZIER_PATH;
             default: 
                 return "ERROR";
         }
@@ -49,15 +52,15 @@ static public class ScoreManager
         switch (game)
         {
             case Game.LATTICE:
-                if (!File.Exists(LATTICE_FILE))
+                if (!File.Exists(LATTICE_PATH))
                 {
-                    File.Create(LATTICE_FILE);
+                    File.Create(LATTICE_PATH);
                 }
                     break;
             case Game.BEZIER:
-                if (!File.Exists(BEZIER_FILE))
+                if (!File.Exists(BEZIER_PATH))
                 {
-                    File.Create(BEZIER_FILE);
+                    File.Create(BEZIER_PATH);
                 }
                 break;
         }

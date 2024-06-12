@@ -188,7 +188,7 @@ public class LatticeManager : MonoBehaviour
             for (int i = 0; i < targetBones.Count(); i++)
             {
                 if(Vector3.Distance(activeBones[i].transform.localPosition,
-                    targetBones[i].transform.localPosition) < 0.5 * Time.deltaTime)
+                    targetBones[i].transform.localPosition) < 0.1 * Time.deltaTime)
                 {
                     activeBones[i].transform.localPosition = targetBones[i].transform.localPosition;
                 }
