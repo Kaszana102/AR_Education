@@ -22,11 +22,13 @@ public class Player : MonoBehaviour
 	[SerializeField] private Image targetColorImage;
     [SerializeField] private Image currentColorImage;
     [SerializeField] private Image winImage;
+
 	[SerializeField] private TextMeshProUGUI similarityValue;
+	[SerializeField] private TextMeshProUGUI targetColorText;
+	[SerializeField] private TextMeshProUGUI currentColorText;
+
 
 	[SerializeField] private GameObject[] vumarks;
-
-	//[SerializeField] private GameObject UIOverlay;
 
 	[SerializeField] private List<Color> colorMixerList = new List<Color>();
 
@@ -100,16 +102,24 @@ public class Player : MonoBehaviour
 	{
 		targetColorImage.color = targetColor;
 
+		targetColorText.text = "#" + UnityEngine.ColorUtility.ToHtmlStringRGB(targetColor);
+		
+
+
 		CalculateColorAndSimilarity();
 
 		if (colorMixerList.Count==0)
 		{
 			currentColorImage.color = Color.white;
+			currentColorText.text = "#" + UnityEngine.ColorUtility.ToHtmlStringRGB(Color.white);
+
 			similarityValue.text = "0%";
 		}
 		else
 		{
 			currentColorImage.color = currentColor;
+			currentColorText.text = "#" + UnityEngine.ColorUtility.ToHtmlStringRGB(currentColor);
+
 			similarityValue.text = Math.Round(CompareColors(targetColor, currentColor), 0).ToString() + "%";
 		}
 	}
