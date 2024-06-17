@@ -36,7 +36,18 @@ If some issues happen with vumarks tracking it is recommended to cover the phone
 
 ### Lattice deform
 
-TODO Jakub Wierzba
+This minigame is supposed to teach the user about lattice deform, and how it deforms the mesh. For simplicity it uses armature deform, which imatated lattice deform. 
+#### UI
+The interactive part of the UI consists of only two simple buttons:
+
+- `Wróć` - returns to the main menu
+- `Nowe zadanie` - generates a new task (One of 4 models with new random  offsets from vumarks)
+
+#### Gameplay
+The aim of the player is to restore the mesh's shape using vumarks. Each vumark had random offset cotnrolling the lattice point, and height of it can be controller using the vumark rotation.
+
+If shape is close enough to resemble the original shape (with certain margin error), the object shape is restored, and the challenge is finished. Score is shown, and dissapears after a moment. After that the the model is glued to the single vumark and player can see the model in detail.
+
 
 
 <br>

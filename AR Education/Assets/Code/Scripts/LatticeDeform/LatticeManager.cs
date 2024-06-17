@@ -8,7 +8,7 @@ public class LatticeManager : MonoBehaviour
 {
     public static LatticeManager Instance { get; private set; }
 
-    [SerializeField] private float ErrorThreshold = 0.2f;
+    [SerializeField] private float ErrorThreshold = 0.05f;
 
     List<GameObject> challenges;
     List<GameObject> targetBones;
@@ -146,10 +146,13 @@ public class LatticeManager : MonoBehaviour
 
         int score = (int)(1000 - elapsedTime);
 
+        #if UNITY_EDITOR
+        #else
         ScoreManager.AddScore(
             new Score(challengeName, score),
             Game.LATTICE
             );
+        #endif
 
         // turn off offseters
         foreach(var vumark in vumarks)
@@ -166,11 +169,18 @@ public class LatticeManager : MonoBehaviour
 
         // start coroutine to set bones to default position over time                   
 
-        StartCoroutine(MoveBonesToDeafult());
+        //StartCoroutine(MoveBonesToDeafult());
+         model.transform.position = new Vector3(0, 1, 0);
+        for (int i = 0; i < targetBones.Count(); i++)
+        {
+            activeBones[i].transform.localPosition = targetBones[i].transform.localPosition;
+        }
+
+        CongratUI.SetActive(false);
     }
 
-
-    IEnumerator MoveBonesToDeafult()
+    //didn't work correctly
+    /*IEnumerator MoveBonesToDeafult()
     {
         float startTime = Time.time;
         float duration = 2f;
@@ -211,7 +221,7 @@ public class LatticeManager : MonoBehaviour
             activeBones[i].transform.localPosition = targetBones[i].transform.localPosition;
         }
 
-    }
+    }*/
 
     Vector3 AveragePos(List<GameObject> objects)
     {
