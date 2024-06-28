@@ -67,7 +67,11 @@ public class ColorDisplayController : MonoBehaviour
 
 		displayMaterial.color = cardsColor;
 
-		colorText = "#" + ColorUtility.ToHtmlStringRGB(displayMaterial.color);
+		int r = Mathf.RoundToInt(color.r * 255);
+		int g = Mathf.RoundToInt(color.g * 255);
+		int b = Mathf.RoundToInt(color.b * 255);
+
+		colorText = $"({r}, {g}, {b})";
 
 		colorValueText.text = colorText;
 		colorAmountText.text = colorAmount.ToString();

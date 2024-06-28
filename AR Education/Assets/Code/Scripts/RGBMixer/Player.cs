@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Drawing;
 using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -102,7 +101,7 @@ public class Player : MonoBehaviour
 	{
 		targetColorImage.color = targetColor;
 
-		targetColorText.text = "#" + UnityEngine.ColorUtility.ToHtmlStringRGB(targetColor);
+		targetColorText.text = FormatColorToRGB(targetColor);
 		
 
 
@@ -111,16 +110,16 @@ public class Player : MonoBehaviour
 		if (colorMixerList.Count==0)
 		{
 			currentColorImage.color = Color.white;
-			currentColorText.text = "#" + UnityEngine.ColorUtility.ToHtmlStringRGB(Color.white);
+			currentColorText.text = FormatColorToRGB(Color.white);
 
 			similarityValue.text = "0%";
 		}
 		else
 		{
 			currentColorImage.color = currentColor;
-			currentColorText.text = "#" + UnityEngine.ColorUtility.ToHtmlStringRGB(currentColor);
+			currentColorText.text = FormatColorToRGB(currentColor);
 
-			similarityValue.text = Math.Round(CompareColors(targetColor, currentColor), 0).ToString() + "%";
+			similarityValue.text = Math.Round(CompareColors(targetColor, currentColor), 1).ToString() + "%";
 		}
 	}
 
@@ -329,6 +328,20 @@ public class Player : MonoBehaviour
 			Debug.Log("You have won!!!");
 			updateUI();
 		}
+	}
+
+	/// <summary>
+	/// Formats given color to 3 RGB bites 
+	/// </summary>
+	/// <param name="color"> Color to be formatted</param>
+	/// <returns>Formatted string like: (255, 255, 255)</returns>
+	private string FormatColorToRGB(Color color)
+	{
+		int r = Mathf.RoundToInt(color.r * 255);
+		int g = Mathf.RoundToInt(color.g * 255);
+		int b = Mathf.RoundToInt(color.b * 255);
+
+		return $"({r}, {g}, {b})";
 	}
 
 	/// <summary>
